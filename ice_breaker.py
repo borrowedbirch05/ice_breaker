@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from langchain.prompts.prompt import PromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_ollama import ChatOllama
-
+from langchain_core.output_parsers import StrOutputParser
 if __name__ == "__main__":
     load_dotenv()
 
@@ -29,7 +29,7 @@ In October 2002, eBay acquired PayPal for $1.5 billion, and that same year, with
     # llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
     llm = ChatOllama(model="llama3.1")
 
-    chain = summary_prompt_template | llm
+    chain = summary_prompt_template | llm | StrOutputParser()
     res = chain.invoke(input={"information": information})
 
     print(res)
