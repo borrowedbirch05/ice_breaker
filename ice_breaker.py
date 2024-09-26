@@ -5,6 +5,7 @@ from langchain_ollama import ChatOllama
 from langchain_core.output_parsers import StrOutputParser
 
 from third_parties.linkedin import scrape_linkedin_profile
+from tools.tools import get_profile_url_tavily
 
 if __name__ == "__main__":
     load_dotenv()
@@ -21,8 +22,8 @@ if __name__ == "__main__":
         input_variables=["information"], template=summary_template
     )
 
-    # llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
-    llm = ChatOllama(model="llama3.1")
+    llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
+    # llm = ChatOllama(model="llama3.1")
 
     chain = summary_prompt_template | llm | StrOutputParser()
 
